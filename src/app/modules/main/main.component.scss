@@ -1,0 +1,10 @@
+.buttons-column {
+  display: flex;
+  flex-direction: column;
+
+  .btn-lg {
+    width: 150px;
+    padding: 10px;
+    margin: 2em;
+  }
+}
