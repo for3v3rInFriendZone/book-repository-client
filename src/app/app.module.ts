@@ -6,19 +6,27 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import { MainComponent } from './modules/main/main.component';
 import { BooksComponent } from './modules/books/books.component';
+import { BookService } from './modules/services/book.service';
+import { HeaderComponent } from './modules/header/header.component';
+import { FooterComponent } from './modules/footer/footer.component';
+import { SharedService } from './util/shared.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    BooksComponent
+    BooksComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [BookService, SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,1 +1,35 @@
-<p>books works!</p>
+<div class="d-flex justify-content-center">
+  <table class="w-75 table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Наслов</th>
+        <th scope="col">Аутори</th>
+        <th scope="col">Издавач</th>
+        <th scope="col">Година издања</th>
+        <th scope="col">Издање</th>
+        <th scope="col">Број страна</th>
+        <th scope="col">Језик издања</th>
+        <th scope="col">Форма</th>
+        <th scope="col">Место чувања</th>
+        <th scope="col">Категорије</th>
+        <th scope="col">Број</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>{{book.title}}</td>
+        <td>{{book.authors}}</td>
+        <td>{{book.publisher}}</td>
+        <td>{{book.publishedYear}}</td>
+        <td>{{book.publication}}</td>
+        <td>{{book.publication}}</td>
+        <td>{{book.publicationLanguage}}</td>
+        <td>{{book.form}}</td>
+        <td>{{book.keepingPlace}}</td>
+        <td>{{book.categories}}</td>
+        <td>{{book.inventoryNumber}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

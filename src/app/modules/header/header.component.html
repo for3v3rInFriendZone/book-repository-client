@@ -1,0 +1,5 @@
+<div class="card-header" [ngClass]="{'text-center': !nameOfRoute}">
+  <i *ngIf="nameOfRoute" class="fas fa-arrow-left" (click)="goBack()" data-toggle="tooltip" data-placement="top" title="Назад"></i>
+  Приватна библиотека Јојић А. Танасија
+  <span class="text-muted" *ngIf="nameOfRoute">- {{nameOfRoute}} </span>
+</div>

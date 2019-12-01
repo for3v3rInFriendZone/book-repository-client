@@ -1,24 +1,19 @@
 <div class="full-container-centered">
-  <div *ngIf="loading">
+  <!-- <div *ngIf="loading">
     <div class="spinner-grow text-warning" style="width: 5rem; height: 5rem;" role="status">
       <span class="sr-only">Учитавање...</span>
     </div>
     <div class="text-info">
       Учитавање...
     </div>
-  </div>
+  </div> -->
 
-  <div *ngIf="!loading" class="card animated zoomIn">
-    <div class="card-header">
-      Приватна библиотека Јојић А. Танасија
-    </div>
+  <div class="card animated zoomIn">
+    <app-header> </app-header>
     <div class="card-body">
       <router-outlet></router-outlet>
     </div>
-    <div class="card-footer text-muted">
-      Број елемената: {{numberOfBooks}}
-    </div>
+    <app-footer> </app-footer>
   </div>
-
 
 </div>

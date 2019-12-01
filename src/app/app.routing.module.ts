@@ -9,7 +9,6 @@ const routes: Routes = [
         path: '',
         redirectTo: '/naslovna',
         pathMatch: 'full'
-
     },
     {
         path: 'naslovna',
