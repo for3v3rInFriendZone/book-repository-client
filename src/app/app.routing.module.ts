@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { MainComponent } from './modules/main/main.component';
 import { BooksComponent } from './modules/books/books.component';
+import { NewBookComponent } from './modules/new-book/new-book.component';
 
 const routes: Routes = [
     {
@@ -13,6 +14,10 @@ const routes: Routes = [
     {
         path: 'naslovna',
         component: MainComponent
+    },
+    {
+        path: 'nova',
+        component: NewBookComponent
     },
     {
         path: 'pregled',

@@ -18,8 +18,12 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
-  booksView() {
+  viewBooksPage() {
     this.router.navigate(['/pregled']);
+  }
+
+  newBookPage() {
+    this.router.navigate(['/nova']);
   }
 
   ngOnDestroy() {

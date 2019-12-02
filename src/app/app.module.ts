@@ -11,6 +11,8 @@ import { HeaderComponent } from './modules/header/header.component';
 import { FooterComponent } from './modules/footer/footer.component';
 import { SharedService } from './util/shared.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NewBookComponent } from './modules/new-book/new-book.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +20,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MainComponent,
     BooksComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    NewBookComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule
   ],
   providers: [BookService, SharedService],
   bootstrap: [AppComponent]
