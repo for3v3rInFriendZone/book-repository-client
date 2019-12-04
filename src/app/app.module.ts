@@ -13,6 +13,7 @@ import { SharedService } from './util/shared.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NewBookComponent } from './modules/new-book/new-book.component';
+import { CategoryService } from './modules/services/category.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { NewBookComponent } from './modules/new-book/new-book.component';
     BrowserAnimationsModule,
     NgbModule
   ],
-  providers: [BookService, SharedService],
+  providers: [BookService, SharedService, CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
