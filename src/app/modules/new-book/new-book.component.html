@@ -1,46 +1,46 @@
 <section *ngIf="categories" class="new-book animated fadeIn">
-  <form class="new-book-form" novalidate>
+  <form class="new-book-form" [formGroup]="bookForm" (ngSubmit)="saveBook()" novalidate>
 
     <div class="divider div-transparent"></div>
 
     <div class="form-group row">
       <div class="col-12 centered-label">
         <label class="col-form-label">Наслов дела</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" formControlName="title">
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-12 centered-label">
         <label class="col-form-label">Аутор(и)</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" formControlName="authors">
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-6 centered-label">
         <label class="col-form-label">Издавач</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" formControlName="publisher">
       </div>
       <div class="col-6 centered-label">
         <label class="col-form-label">Издање</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" formControlName="publication">
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-3 centered-label">
         <label class="col-form-label">Година издања</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" formControlName="publishedYear">
       </div>
       <div class="col-3 centered-label">
         <label class="col-form-label">Број страна</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" formControlName="numberOfPages">
       </div>
       <div class="col-6 centered-label">
         <label class="col-form-label">Језик публикације</label>
-        <select class="custom-select">
-          <option selected>Изаберите језик публикације</option>
+        <select class="custom-select" formControlName="publicationLanguage">
+          <option value="0" selected>Изаберите језик публикације</option>
           <option value="1">Српски</option>
           <option value="2">Немачки</option>
           <option value="3">Руски</option>
@@ -52,41 +52,41 @@
     <div class="form-group row">
       <div class="col-6 centered-label">
         <label class="col-form-label">Форма</label>
-        <select class="custom-select">
-          <option selected>Изаберите форму</option>
-          <option value="1">Папирна</option>
-          <option value="2">Електронска</option>
+        <select class="custom-select" formControlName="form">
+          <option value="0">Изаберите форму</option>
+          <option *ngFor="let form of formArray" [value]="form">{{form}}</option>
         </select>
       </div>
       <div class="col-6 centered-label">
         <label class="col-form-label">Место чувања</label>
-        <select class="custom-select">
-          <option selected>Изаберите место чувања</option>
-          <option value="1">Нови Сад</option>
-          <option value="2">Факултет</option>
-          <option value="3">Стара Пазова</option>
-          <option value="4">Друго</option>
+        <select class="custom-select" formControlName="keepingPlace">
+          <option value="0" selected>Изаберите место чувања</option>
+          <option *ngFor="let place of keepingPlaces" [value]="place">{{place}}</option>
         </select>
       </div>
     </div>
 
-    <div class="form-group row mb-5">
+    <div class="form-group row mb-4">
       <div class="col-9 centered-label">
-        <label class="col-form-label">Област</label>
-        <select class="custom-select">
-          <option selected>Изаберите област</option>
-          <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
-        </select>
+        <!-- <label class="col-form-label">Област</label> -->
+        <!-- <select class="custom-select" formControlName="categories" multiple>
+          <option *ngFor="let category of categories" [value]="category">{{category.name}}</option>
+        </select> -->
+        <ng-select [items]="categories" bindLabel="Област" placeholder="Изаберите област" appendTo="body"
+          multiple="true" formControlName="categories">
+        </ng-select>
       </div>
+
       <div class="col-3 centered-label">
         <label class="col-form-label">Инвентарски број</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" formControlName="inventoryNumber">
       </div>
     </div>
     <div class="divider div-transparent"></div>
     <div class="d-flex justify-content-around">
-      <button class="btn btn-outline-success btn-lg">Сачувај <i class="far fa-save"></i></button>
-      <button class="btn btn-outline-secondary btn-lg">Очисти <i class="fas fa-eraser"></i></button>
+      <button type="submit" class="btn btn-outline-success btn-lg">Сачувај <i class="far fa-save"></i></button>
+      <button (click)="clearBookForm()" class="btn btn-outline-secondary btn-lg">Очисти <i
+          class="fas fa-eraser"></i></button>
     </div>
   </form>
 

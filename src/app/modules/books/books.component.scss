@@ -1,4 +1,12 @@
 .table {
   background-color: white;
   font-size: 12px;
+
+  tbody {
+    tr:hover {
+      background-color: lightslategray;
+      color: white;
+    }
+  }
+
 }
