@@ -68,13 +68,10 @@
 
     <div class="form-group row mb-4">
       <div class="col-9 centered-label">
-        <!-- <label class="col-form-label">Област</label> -->
-        <!-- <select class="custom-select" formControlName="categories" multiple>
+        <label class="col-form-label">Област</label>
+        <select class="custom-select" formControlName="categories" multiple>
           <option *ngFor="let category of categories" [value]="category">{{category.name}}</option>
-        </select> -->
-        <ng-select [items]="categories" bindLabel="Област" placeholder="Изаберите област" appendTo="body"
-          multiple="true" formControlName="categories">
-        </ng-select>
+        </select>
       </div>
 
       <div class="col-3 centered-label">
