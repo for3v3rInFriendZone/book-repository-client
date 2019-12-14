@@ -10,22 +10,22 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import { MainComponent } from './modules/main/main.component';
-import { BooksComponent } from './modules/books/books.component';
+import { BookListComponent } from './modules/book-list/book-list.component';
 import { BookService } from './modules/services/book.service';
 import { HeaderComponent } from './modules/header/header.component';
 import { FooterComponent } from './modules/footer/footer.component';
 import { SharedService } from './util/shared.service';
-import { NewBookComponent } from './modules/new-book/new-book.component';
+import { BookComponent } from './modules/book/book.component';
 import { CategoryService } from './modules/services/category.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    BooksComponent,
+    BookListComponent,
     HeaderComponent,
     FooterComponent,
-    NewBookComponent
+    BookComponent
   ],
   imports: [
     BrowserModule,

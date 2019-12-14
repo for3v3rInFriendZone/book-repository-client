@@ -1,5 +1,5 @@
-<section *ngIf="categories" class="new-book animated fadeIn">
-  <form class="new-book-form" [formGroup]="bookForm" (ngSubmit)="saveBook()" novalidate>
+<section *ngIf="bookForm" class="new-book animated fadeIn">
+  <form class="new-book-form" [formGroup]="bookForm" novalidate>
 
     <div class="divider div-transparent"></div>
 
@@ -41,10 +41,10 @@
         <label class="col-form-label">Језик публикације</label>
         <select class="custom-select" formControlName="publicationLanguage">
           <option value="0" selected>Изаберите језик публикације</option>
-          <option value="1">Српски</option>
-          <option value="2">Немачки</option>
-          <option value="3">Руски</option>
-          <option value="4">Енглески</option>
+          <option value="Српски">Српски</option>
+          <option value="Немачки">Немачки</option>
+          <option value="Руски">Руски</option>
+          <option value="Енглески">Енглески</option>
         </select>
       </div>
     </div>
@@ -69,8 +69,8 @@
     <div class="form-group row mb-3">
       <div class="col-6 centered-label"> 
         <label class="col-form-label">Област</label>
-        <select class="custom-select h-75" formControlName="categories" multiple>
-          <option *ngFor="let category of categories" [value]="category">{{category.name}}</option>
+        <select multiple class="custom-select h-75" formControlName="categories">
+          <option *ngFor="let category of availableCategories" [value]="category.id">{{category.name}}</option>
         </select>
       </div>
 
@@ -81,9 +81,8 @@
     </div>
     <div class="divider div-transparent"></div>
     <div class="d-flex justify-content-around">
-      <button type="submit" class="btn btn-outline-success btn-lg">Сачувај <i class="far fa-save"></i></button>
-      <button (click)="clearBookForm()" class="btn btn-outline-secondary btn-lg">Очисти <i
-          class="fas fa-eraser"></i></button>
+      <button type="button" (click)="saveBook()" class="btn btn-outline-success btn-lg">Сачувај <i class="far fa-save"></i></button>
+      <button type="button" (click)="clearBookForm()" class="btn btn-outline-secondary btn-lg">Очисти <i class="fas fa-eraser"></i></button>
     </div>
   </form>
 

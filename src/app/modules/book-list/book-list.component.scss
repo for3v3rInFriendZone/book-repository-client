@@ -2,6 +2,13 @@
   background-color: white;
   font-size: 12px;
 
+  thead {
+    th {
+      text-align: center;
+      font-weight: 600;
+    }
+  }
+
   tbody {
     tr:hover {
       background-color: lightslategray;

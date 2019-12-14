@@ -40,6 +40,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   goBack() {
     this.sharedService.sendMessage('');
-    this.router.navigate(['/naslovna']);
+    this.location.back();
   }
 }

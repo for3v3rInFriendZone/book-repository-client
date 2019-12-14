@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { MainComponent } from './modules/main/main.component';
-import { BooksComponent } from './modules/books/books.component';
-import { NewBookComponent } from './modules/new-book/new-book.component';
+import { BookListComponent } from './modules/book-list/book-list.component';
+import { BookComponent } from './modules/book/book.component';
 
 const routes: Routes = [
     {
@@ -17,11 +17,15 @@ const routes: Routes = [
     },
     {
         path: 'nova',
-        component: NewBookComponent
+        component: BookComponent
+    },
+    {
+        path: 'knjiga/:id',
+        component: BookComponent
     },
     {
         path: 'pregled',
-        component: BooksComponent
+        component: BookListComponent
     },
     {
         path: '**',

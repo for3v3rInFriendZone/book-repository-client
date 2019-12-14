@@ -11,5 +11,5 @@ export interface Book {
     form: string;
     keepingPlace: string;
     inventoryNumber: number;
-    categories: Category[];
+    categories: string[];
 }
