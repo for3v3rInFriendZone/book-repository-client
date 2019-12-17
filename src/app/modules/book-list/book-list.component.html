@@ -1,4 +1,6 @@
-<section class="all-books">
+<app-spinner [showSpinner]="isLoading" message="Учитавање књига"> </app-spinner>
+
+<section *ngIf="!isLoading" class="all-books">
   <table class="animated fadeIn table table-hover">
     <thead>
       <tr>
@@ -11,7 +13,7 @@
         <th scope="col">Језик издања</th>
         <th scope="col">Форма</th>
         <th scope="col">Место чувања</th>
-        <th scope="col">Број</th>
+        <th scope="col">Инвентарски број</th>
       </tr>
     </thead>
     <tbody>

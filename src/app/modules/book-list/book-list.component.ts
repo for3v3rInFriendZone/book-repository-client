@@ -15,7 +15,7 @@ import { SharedService } from 'src/app/util/shared.service';
 export class BookListComponent implements OnInit, OnDestroy {
 
   componentActive = true;
-  loading: boolean;
+  isLoading = false;
   books: Book[];
   routeHeader = 'Преглед књига';
 
@@ -31,17 +31,17 @@ export class BookListComponent implements OnInit, OnDestroy {
   }
 
   getBooks() {
-    this.loading = true;
+    this.isLoading = true;
 
     this.bookService.getBooks()
       .pipe(
         takeWhile(() => this.componentActive)
       ).subscribe(
         books => {
-          this.loading = false;
+          this.isLoading = false; 
           this.books = books;
         },
-        () => this.loading = false
+        () => this.isLoading = false
       );
   }
 

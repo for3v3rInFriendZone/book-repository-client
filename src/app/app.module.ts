@@ -17,6 +17,7 @@ import { FooterComponent } from './modules/footer/footer.component';
 import { SharedService } from './util/shared.service';
 import { BookComponent } from './modules/book/book.component';
 import { CategoryService } from './modules/services/category.service';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CategoryService } from './modules/services/category.service';
     BookListComponent,
     HeaderComponent,
     FooterComponent,
-    BookComponent
+    BookComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
