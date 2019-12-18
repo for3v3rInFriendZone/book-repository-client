@@ -1,5 +1,18 @@
 <app-spinner [showSpinner]="isLoading" message="Учитавање књига"> </app-spinner>
 
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h2 class="modal-title">Изаберите понуђене опције</h2>
+  </div>
+  <div class="modal-body">
+    <button type="button" class="btn btn-outline-warning">Измени податке</button>
+    <button type="button" class="btn btn-outline-danger">Обриши књигу</button>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Назад</button>
+  </div>
+</ng-template>
+
 <section *ngIf="!isLoading" class="all-books">
   <table class="animated fadeIn table table-hover">
     <thead>
@@ -17,7 +30,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let book of books" (click)="bookDetails(book.id)">
+      <tr *ngFor="let book of books" (click)="displayOptions(content, book.id)">
         <td>{{book.title}}</td>
         <td>{{book.authors}}</td>
         <td>{{book.publisher}}</td>

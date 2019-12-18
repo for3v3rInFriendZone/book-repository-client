@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 
 import { takeWhile } from 'rxjs/internal/operators/takeWhile';
 
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { BookService } from '../services/book.service';
 import { Book } from 'src/app/model/Book';
 import { SharedService } from 'src/app/util/shared.service';
@@ -22,7 +24,8 @@ export class BookListComponent implements OnInit, OnDestroy {
   constructor(
     private bookService: BookService,
     private sharedService: SharedService,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
@@ -38,15 +41,19 @@ export class BookListComponent implements OnInit, OnDestroy {
         takeWhile(() => this.componentActive)
       ).subscribe(
         books => {
-          this.isLoading = false; 
+          this.isLoading = false;
           this.books = books;
         },
         () => this.isLoading = false
       );
   }
 
-  bookDetails(id: string) {
-    this.router.navigate(['/knjiga', id]);
+  // bookDetails(id: string) {
+  //   this.router.navigate(['/knjiga', id]);
+  // }
+
+  displayOptions(content, bookId: string) {
+    this.modalService.open(content, { centered: true });
   }
 
   ngOnDestroy() {

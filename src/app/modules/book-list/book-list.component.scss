@@ -10,10 +10,28 @@
 
   tbody {
     tr:hover {
-      background-color: lightsalmon;
+      background-color: lightsteelblue;
       color: white;
       cursor: pointer;
     }
   }
+}
 
+.modal-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightskyblue;
+  font-weight: 650;
+  font-size: 16px;
+}
+
+.modal-body {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
 }
