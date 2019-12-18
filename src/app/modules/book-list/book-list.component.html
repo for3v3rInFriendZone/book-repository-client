@@ -1,48 +1,27 @@
 <app-spinner [showSpinner]="isLoading" message="Учитавање књига"> </app-spinner>
 
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h2 class="modal-title">Изаберите понуђене опције</h2>
-  </div>
-  <div class="modal-body">
-    <button type="button" class="btn btn-outline-warning">Измени податке</button>
-    <button type="button" class="btn btn-outline-danger">Обриши књигу</button>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Назад</button>
-  </div>
-</ng-template>
+<div class="animated fadeIn m-2 row" *ngIf="!isLoading">
 
-<section *ngIf="!isLoading" class="all-books">
-  <table class="animated fadeIn table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">Наслов</th>
-        <th scope="col">Аутори</th>
-        <th scope="col">Издавач</th>
-        <th scope="col">Година издања</th>
-        <th scope="col">Издање</th>
-        <th scope="col">Број страна</th>
-        <th scope="col">Језик издања</th>
-        <th scope="col">Форма</th>
-        <th scope="col">Место чувања</th>
-        <th scope="col">Инвентарски број</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let book of books" (click)="displayOptions(content, book.id)">
-        <td>{{book.title}}</td>
-        <td>{{book.authors}}</td>
-        <td>{{book.publisher}}</td>
-        <td>{{book.publishedYear}}</td>
-        <td>{{book.publication}}</td>
-        <td>{{book.publication}}</td>
-        <td>{{book.publicationLanguage}}</td>
-        <td>{{book.form}}</td>
-        <td>{{book.keepingPlace}}</td>
-        <td>{{book.inventoryNumber}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div *ngFor="let book of books" class="card col-2">
+    <img class="card-img-top" src="https://www.knjizara.com/slika/Zlocin-i-kazna-65474.jpg" alt="Slika knjige">
 
-</section>
+    <div class="card-body">
+      <div class="card-title text-center">{{book.title}}</div>
+      <div class="card-author text-center">{{book.authors}}</div>
+
+      <div class="divider div-transparent"></div>
+
+      <div class="card-details">Чувам: {{book.keepingPlace}}</div>
+      <div class="card-details">Број страница: <span class="font-weight-bold"> {{book.numberOfPages}} </span> </div>
+      <div class="card-details">Унето: <span class="font-italic"> {{book.createdAt}} </span> </div>
+    </div>
+
+    <div class="card-footer">
+      <div class="text-muted">
+        <button type="button" class="btn btn-outline-warning" (click)="bookDetails(book.id)">Измени</button>
+        <button type="button" class="btn btn-outline-danger">Обриши</button>
+      </div>
+    </div>
+  </div>
+
+</div>

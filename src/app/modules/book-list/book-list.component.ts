@@ -48,9 +48,9 @@ export class BookListComponent implements OnInit, OnDestroy {
       );
   }
 
-  // bookDetails(id: string) {
-  //   this.router.navigate(['/knjiga', id]);
-  // }
+  bookDetails(id: string) {
+    this.router.navigate(['/knjiga', id]);
+  }
 
   displayOptions(content, bookId: string) {
     this.modalService.open(content, { centered: true });
