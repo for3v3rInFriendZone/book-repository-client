@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { takeWhile } from 'rxjs/internal/operators/takeWhile';
 
 import { SharedService } from 'src/app/util/shared.service';
 import { Category } from 'src/app/model/category';
 import { CategoryService } from '../services/category.service';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-category',
@@ -26,7 +27,9 @@ export class CategoryComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private toastService: ToastService,
+    private route: Router
   ) { }
 
   ngOnInit() {
@@ -63,30 +66,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
     }
   }
 
-  private updateCategory(id: string) {
-    this.categoryService.update(id, this.categoryForm.value)
-      .pipe(
-        takeWhile(() => this.componentActive)
-      ).subscribe(
-        updatedCategory => {
-          console.log(updatedCategory);
-        },
-        err => console.log(err)
-      );
-  }
-
-  private saveCategory() {
-    this.categoryService.save(this.categoryForm.value)
-      .pipe(
-        takeWhile(() => this.componentActive)
-      ).subscribe(
-        savedCategory => {
-          console.log(savedCategory);
-        },
-        err => console.log(err)
-      );
-  }
-
   clearForm() {
     this.categoryForm.reset();
   }
@@ -100,6 +79,32 @@ export class CategoryComponent implements OnInit, OnDestroy {
       name: new FormControl(this.category.name)
     });
   }
+  
+  private updateCategory(id: string) {
+    this.categoryService.update(id, this.categoryForm.value)
+      .pipe(
+        takeWhile(() => this.componentActive)
+      ).subscribe(
+        () => {
+          this.showSuccess('Успешно сачувана категорија!');
+          this.route.navigate(['/naslovna']);
+        },
+        err => console.log(err)
+      );
+  }
+
+  private saveCategory() {
+    this.categoryService.save(this.categoryForm.value)
+      .pipe(
+        takeWhile(() => this.componentActive)
+      ).subscribe(
+        () => {
+          this.showSuccess('Успешно направљена категорија!');
+          this.route.navigate(['/naslovna']);
+        },
+        err => console.log(err)
+      );
+  }
 
   private getCategoryById(categoryId: string) {
     this.categoryService.getById(categoryId)
@@ -111,5 +116,14 @@ export class CategoryComponent implements OnInit, OnDestroy {
           this.createForm();
         }
       );
+  }
+
+  private showSuccess(text: string) {
+    this.toastService.show(text, {
+      classname: 'bg-success text-light',
+      delay: 3000,
+      autohide: true,
+      headertext: 'Честитамо'
+    });
   }
 }
