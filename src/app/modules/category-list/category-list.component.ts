@@ -16,12 +16,17 @@ export class CategoryListComponent implements OnInit, OnDestroy {
 
   componentActive = true;
   isLoading = false;
-  categories: Category[];
+  dbCategories: Category[];
   routeHeader = 'Преглед категорија';
+
+  get categories(): Category[] {
+    return this.dbCategories.slice(
+      (this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  }
 
   page = 1;
   pageSize = 5;
-  collectionSize = 0;
+  collectionSize;
 
   constructor(
     private categoryService: CategoryService,
@@ -50,9 +55,8 @@ export class CategoryListComponent implements OnInit, OnDestroy {
         takeWhile(() => this.componentActive)
       ).subscribe(
         categories => {
-          this.categories = categories
-            .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);;
-          this.collectionSize = this.categories.length;
+          this.dbCategories = categories;
+          this.collectionSize = categories.length;
 
           this.isLoading = false;
         },
