@@ -1,4 +1,5 @@
 <section *ngIf="bookForm" class="new-book animated fadeIn">
+
   <form class="new-book-form" [formGroup]="bookForm" novalidate>
 
     <div class="divider div-transparent"></div>
@@ -67,7 +68,7 @@
     </div>
 
     <div class="form-group row mb-3">
-      <div class="col-6 centered-label"> 
+      <div class="col-6 centered-label">
         <label class="col-form-label">Област</label>
         <select multiple class="custom-select h-75" formControlName="categories">
           <option *ngFor="let category of availableCategories" [value]="category.id">{{category.name}}</option>
@@ -79,10 +80,14 @@
         <input type="text" class="form-control" formControlName="inventoryNumber">
       </div>
     </div>
+
     <div class="divider div-transparent"></div>
+
     <div class="d-flex justify-content-around">
-      <button type="button" (click)="saveBook()" class="btn btn-outline-success btn-lg">Сачувај <i class="far fa-save"></i></button>
-      <button type="button" (click)="clearBookForm()" class="btn btn-outline-secondary btn-lg">Очисти <i class="fas fa-eraser"></i></button>
+      <button type="button" (click)="saveBook()" class="btn btn-outline-success btn-lg">Сачувај <i
+          class="far fa-save"></i></button>
+      <button type="button" (click)="clearForm()" class="btn btn-outline-secondary btn-lg">Очисти <i
+          class="fas fa-eraser"></i></button>
     </div>
   </form>
 

@@ -1,0 +1,22 @@
+.new-category {
+  display: flex;
+  justify-content: center;
+
+  .new-category-form {
+    margin-top: 100px;
+    padding: 15px;
+    width: 650px;
+    height: 500px;
+    
+
+    input {
+      border-radius: 6px;
+    }
+
+    .centered-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}

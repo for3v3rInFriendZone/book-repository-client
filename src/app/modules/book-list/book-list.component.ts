@@ -36,7 +36,7 @@ export class BookListComponent implements OnInit, OnDestroy {
   getBooks() {
     this.isLoading = true;
 
-    this.bookService.getBooks()
+    this.bookService.getAll()
       .pipe(
         takeWhile(() => this.componentActive)
       ).subscribe(

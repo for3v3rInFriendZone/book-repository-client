@@ -18,12 +18,20 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
-  viewBooksPage() {
-    this.router.navigate(['/pregled']);
+  newBookPage() {
+    this.router.navigate(['/knjiga/nova']);
   }
 
-  newBookPage() {
-    this.router.navigate(['/nova']);
+  viewBooksPage() {
+    this.router.navigate(['/knjige']);
+  }
+
+  newCategoryPage() {
+    this.router.navigate(['/kategorija/nova']);
+  }
+
+  viewCategoriesPage() {
+    this.router.navigate(['/kategorije']);
   }
 
   ngOnDestroy() {

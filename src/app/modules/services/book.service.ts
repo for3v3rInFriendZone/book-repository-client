@@ -14,15 +14,15 @@ export class BookService {
 
   constructor(private http: HttpClient) { }
 
-  getBookById(id: string): Observable<Book> {
-    return this.http.get<Book>(`${environment.url}${this.booksUrl}/${id}`);
-  }
-
-  getBooks(): Observable<Book[]> {
+  getAll(): Observable<Book[]> {
     return this.http.get<Book[]>(`${environment.url}${this.booksUrl}`);
   }
 
-  saveBook(book: Book): Observable<Book> {
+  getById(id: string): Observable<Book> {
+    return this.http.get<Book>(`${environment.url}${this.booksUrl}/${id}`);
+  }
+
+  save(book: Book): Observable<Book> {
     return this.http.post<Book>(`${environment.url}${this.booksUrl}`, book);
   }
 }

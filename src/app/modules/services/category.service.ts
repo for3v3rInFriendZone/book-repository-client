@@ -6,15 +6,27 @@ import { environment } from 'src/environments/environment';
 import { Category } from 'src/app/model/category';
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root'
 })
 export class CategoryService {
 
-	categoryUrl = '/category';
+  categoryUrl = '/category';
 
-	constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-	getCategories(): Observable<Category[]> {
-		return this.http.get<Category[]>(`${environment.url}${this.categoryUrl}`);
-	}
+  getAll(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${environment.url}${this.categoryUrl}`);
+  }
+
+  getById(categoryId: string): Observable<Category> {
+    return this.http.get<Category>(`${environment.url}${this.categoryUrl}/${categoryId}`);
+  }
+
+  save(category: Category): Observable<Category> {
+    return this.http.post<Category>(`${environment.url}${this.categoryUrl}`, category);
+  }
+
+  remove(categoryId: string): Observable<boolean> {
+    return this.http.delete<boolean>(`${environment.url}${this.categoryUrl}/${categoryId}`);
+  }
 }

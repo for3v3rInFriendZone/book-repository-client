@@ -26,7 +26,7 @@ export class FooterComponent implements OnInit {
   getBooks() {
     this.loading = true;
 
-    this.bookService.getBooks()
+    this.bookService.getAll()
       .pipe(
         takeWhile(() => this.componentActive)
       ).subscribe(

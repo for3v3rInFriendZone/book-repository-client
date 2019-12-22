@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './modules/main/main.component';
 import { BookListComponent } from './modules/book-list/book-list.component';
 import { BookComponent } from './modules/book/book.component';
+import { CategoryComponent } from './modules/category/category.component';
+import { CategoryListComponent } from './modules/category-list/category-list.component';
 
 const routes: Routes = [
     {
@@ -16,7 +18,7 @@ const routes: Routes = [
         component: MainComponent
     },
     {
-        path: 'nova',
+        path: 'knjiga/nova',
         component: BookComponent
     },
     {
@@ -24,8 +26,20 @@ const routes: Routes = [
         component: BookComponent
     },
     {
-        path: 'pregled',
+        path: 'knjige',
         component: BookListComponent
+    },
+    {
+        path: 'kategorija/nova',
+        component: CategoryComponent
+    },
+    {
+        path: 'kategorija/:id',
+        component: CategoryComponent
+    },
+    {
+        path: 'kategorije',
+        component: CategoryListComponent
     },
     {
         path: '**',

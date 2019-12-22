@@ -18,6 +18,8 @@ import { SharedService } from './util/shared.service';
 import { BookComponent } from './modules/book/book.component';
 import { CategoryService } from './modules/services/category.service';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { CategoryComponent } from './modules/category/category.component';
+import { CategoryListComponent } from './modules/category-list/category-list.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { SpinnerComponent } from './spinner/spinner.component';
     HeaderComponent,
     FooterComponent,
     BookComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    CategoryComponent,
+    CategoryListComponent
   ],
   imports: [
     BrowserModule,

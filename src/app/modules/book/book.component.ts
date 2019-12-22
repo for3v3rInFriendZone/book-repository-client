@@ -41,7 +41,7 @@ export class BookComponent implements OnInit, OnDestroy {
   }
 
   getCategories() {
-    this.categoryService.getCategories()
+    this.categoryService.getAll()
       .pipe(
         takeWhile(() => this.componentActive)
       ).subscribe(
@@ -68,7 +68,7 @@ export class BookComponent implements OnInit, OnDestroy {
   }
 
   getBookById(bookId: string) {
-    this.bookService.getBookById(bookId)
+    this.bookService.getById(bookId)
       .pipe(
         takeWhile(() => this.componentActive)
       ).subscribe(
@@ -86,7 +86,7 @@ export class BookComponent implements OnInit, OnDestroy {
     const newBook: Book = this.bookForm.value;
     newBook.authors = this.getAuthors(this.bookForm.value.authors);
 
-    this.bookService.saveBook(newBook)
+    this.bookService.save(newBook)
       .pipe(
         takeWhile(() => this.componentActive)
       ).subscribe(
@@ -97,7 +97,7 @@ export class BookComponent implements OnInit, OnDestroy {
       );
   }
 
-  clearBookForm() {
+  clearForm() {
     this.bookForm.reset();
   }
 
