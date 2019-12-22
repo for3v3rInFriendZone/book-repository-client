@@ -11,13 +11,17 @@
       flex-direction: column;
       font-size: 13px;
       padding: 12px;
+      height: 150px;
 
       .card-title {
         font-weight: 600;
+        height: 50px;
+        text-overflow: ellipsis;
       }
 
       .card-author {
         margin-bottom: 8px;
+        height: 40px;
       }
 
       .card-title:hover {
@@ -34,11 +38,9 @@
 
       .btn {
         font-size: 11px;
-        margin-right: 6px;
+        margin: 4px;
       }
     }
-
-
 }
 
 .col-2 {
