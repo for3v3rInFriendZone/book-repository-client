@@ -2,8 +2,6 @@
 
   <form class="new-category-form" [formGroup]="categoryForm" novalidate>
 
-    <div class="divider div-transparent"></div>
-
     <div class="form-group row">
       <div class="col-12 centered-label">
         <label class="col-form-label">Назив категорије</label>
@@ -16,6 +14,8 @@
     <div class="d-flex justify-content-around mt-4">
       <button type="button" (click)="submittedCategory()" class="btn btn-outline-success btn-lg">Сачувај <i
           class="far fa-save"></i></button>
+      <button type="button" *ngIf="isEdit" (click)="removeCategory()" class="btn btn-outline-danger btn-lg">Обриши <i
+          class="fas fa-minus-square"></i></button>
       <button type="button" (click)="clearForm()" class="btn btn-outline-secondary btn-lg">Очисти <i
           class="fas fa-eraser"></i></button>
     </div>

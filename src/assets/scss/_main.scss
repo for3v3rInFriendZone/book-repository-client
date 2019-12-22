@@ -15,21 +15,25 @@ body {
   justify-content: center;
 }
 
-.divider
-{
-	position: relative;
-	margin-bottom: 10px;
-	height: 1px;
+.divider {
+  position: relative;
+  margin-bottom: 10px;
+  height: 1px;
 }
 
-.div-transparent:before
-{
-	content: "";
-	position: absolute;
-	top: 0;
-	left: 5%;
-	right: 5%;
-	width: 90%;
-	height: 1px;
-	background-image: linear-gradient(to right, transparent, rgb(48,49,51), transparent);
+.div-transparent:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  width: 90%;
+  height: 1px;
+  background-image: linear-gradient(to right, transparent, rgb(48, 49, 51), transparent);
+}
+
+.mat-simple-snackbar {
+  justify-content: center !important;
+  font-size: 13px;
+  color: lightgreen;
 }

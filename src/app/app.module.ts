@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import { MainComponent } from './modules/main/main.component';
@@ -43,7 +45,8 @@ import { ToastsComponent } from './modules/toasts/toasts.component';
     ReactiveFormsModule,
     NgbModule,
     NgSelectModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatSnackBarModule
   ],
   providers: [BookService, SharedService, CategoryService],
   bootstrap: [AppComponent]

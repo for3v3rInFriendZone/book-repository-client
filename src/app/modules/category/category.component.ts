@@ -3,11 +3,11 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { takeWhile } from 'rxjs/internal/operators/takeWhile';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { SharedService } from 'src/app/util/shared.service';
 import { Category } from 'src/app/model/category';
 import { CategoryService } from '../services/category.service';
-import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-category',
@@ -17,6 +17,7 @@ import { ToastService } from '../services/toast.service';
 export class CategoryComponent implements OnInit, OnDestroy {
 
   componentActive = true;
+  isEdit = false;
   newCategoryRoute = 'Нова категорија';
   editCategoryRoute = 'Измена категорије';
   categoryForm: FormGroup;
@@ -28,7 +29,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private categoryService: CategoryService,
-    private toastService: ToastService,
+    private snackBar: MatSnackBar,
     private route: Router
   ) { }
 
@@ -44,6 +45,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
         params => {
           this.categoryId = params['id'];
           if (this.categoryId) {
+            this.isEdit = true;
             this.sharedService.sendMessage(this.editCategoryRoute);
             this.getCategoryById(this.categoryId);
           } else {
@@ -55,15 +57,30 @@ export class CategoryComponent implements OnInit, OnDestroy {
   }
 
   submittedCategory() {
+
     if (this.categoryForm.invalid) {
       console.log('Invalid form!');
     }
 
-    if (this.category.id) {
+    if (this.isEdit) {
       this.updateCategory(this.category.id);
     } else {
       this.saveCategory();
     }
+  }
+  
+  removeCategory() {
+
+    this.categoryService.remove(this.category.id)
+    .pipe(
+      takeWhile(() => this.componentActive)
+    ).subscribe(
+      () => {
+        this.showSuccess('Успешно обрисана категорија!');
+        this.route.navigate(['/kategorije']);
+      },
+      err => console.log(err)
+    );
   }
 
   clearForm() {
@@ -119,11 +136,8 @@ export class CategoryComponent implements OnInit, OnDestroy {
   }
 
   private showSuccess(text: string) {
-    this.toastService.show(text, {
-      classname: 'bg-success text-light',
-      delay: 3000,
-      autohide: true,
-      headertext: 'Честитамо'
+    this.snackBar.open(text, '', {
+      duration: 2000,
     });
   }
 }

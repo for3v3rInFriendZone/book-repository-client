@@ -63,5 +63,4 @@ export class CategoryListComponent implements OnInit, OnDestroy {
         () => this.isLoading = false
       );
   }
-
 }
