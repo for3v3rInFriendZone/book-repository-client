@@ -18,15 +18,19 @@ export class CategoryService {
     return this.http.get<Category[]>(`${environment.url}${this.categoryUrl}`);
   }
 
-  getById(categoryId: string): Observable<Category> {
-    return this.http.get<Category>(`${environment.url}${this.categoryUrl}/${categoryId}`);
+  getById(id: string): Observable<Category> {
+    return this.http.get<Category>(`${environment.url}${this.categoryUrl}/${id}`);
   }
 
   save(category: Category): Observable<Category> {
     return this.http.post<Category>(`${environment.url}${this.categoryUrl}`, category);
   }
 
-  remove(categoryId: string): Observable<boolean> {
-    return this.http.delete<boolean>(`${environment.url}${this.categoryUrl}/${categoryId}`);
+  update(id: string, category: Category) {
+    return this.http.put<Category>(`${environment.url}${this.categoryUrl}/${id}`, category);
+  }
+
+  remove(id: string): Observable<boolean> {
+    return this.http.delete<boolean>(`${environment.url}${this.categoryUrl}/${id}`);
   }
 }

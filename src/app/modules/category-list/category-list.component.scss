@@ -1,0 +1,40 @@
+.full-category {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .categories {
+    margin-top: 1em;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+
+    .table {
+      background-color: white;
+      font-size: 12px;
+
+      thead {
+        th {
+          text-align: center;
+          font-weight: 600;
+        }
+      }
+
+      tbody {
+        tr:hover {
+          background-color: lightsteelblue;
+          color: white;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .category-pagination {
+      display: flex;
+      padding: 0.5em;
+      justify-content: space-between;
+    }
+
+  }
+}

@@ -67,18 +67,6 @@ export class BookComponent implements OnInit, OnDestroy {
       );
   }
 
-  getBookById(bookId: string) {
-    this.bookService.getById(bookId)
-      .pipe(
-        takeWhile(() => this.componentActive)
-      ).subscribe(
-        book => {
-          this.book = book;
-          this.createForm();
-        }
-      );
-  }
-
   saveBook() {
     if (this.bookForm.invalid) {
       console.log('Invalid form!');
@@ -115,6 +103,18 @@ export class BookComponent implements OnInit, OnDestroy {
     }
 
     return [];
+  }
+
+  private getBookById(bookId: string) {
+    this.bookService.getById(bookId)
+      .pipe(
+        takeWhile(() => this.componentActive)
+      ).subscribe(
+        book => {
+          this.book = book;
+          this.createForm();
+        }
+      );
   }
 
   private createForm() {

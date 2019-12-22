@@ -1,1 +1,30 @@
-<p>category-list works!</p>
+<app-spinner [showSpinner]="isLoading" message="Учитавање категорија"> </app-spinner>
+
+<div class="animated fadeIn full-category" *ngIf="!isLoading">
+  <section class="categories">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Назив</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of categories" (click)="goToEditCategory(category.id)">
+          <td>{{ category.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="category-pagination">
+      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+      </ngb-pagination>
+
+      <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+        <option [ngValue]="5">5 категорија по страни</option>
+        <option [ngValue]="10">10 категорија по страни</option>
+        <option [ngValue]="20">20 категорија по страни</option>
+      </select>
+    </div>
+  </section>
+
+</div>

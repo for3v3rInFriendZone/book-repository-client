@@ -42,7 +42,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
           this.categoryId = params['id'];
           if (this.categoryId) {
             this.sharedService.sendMessage(this.editCategoryRoute);
-            // this.getBookById(this.bookId);
+            this.getCategoryById(this.categoryId);
           } else {
             this.sharedService.sendMessage(this.newCategoryRoute);
             this.createForm();
@@ -51,11 +51,31 @@ export class CategoryComponent implements OnInit, OnDestroy {
       );
   }
 
-  saveCategory() {
+  submittedCategory() {
     if (this.categoryForm.invalid) {
       console.log('Invalid form!');
     }
 
+    if (this.category.id) {
+      this.updateCategory(this.category.id);
+    } else {
+      this.saveCategory();
+    }
+  }
+
+  private updateCategory(id: string) {
+    this.categoryService.update(id, this.categoryForm.value)
+      .pipe(
+        takeWhile(() => this.componentActive)
+      ).subscribe(
+        updatedCategory => {
+          console.log(updatedCategory);
+        },
+        err => console.log(err)
+      );
+  }
+
+  private saveCategory() {
     this.categoryService.save(this.categoryForm.value)
       .pipe(
         takeWhile(() => this.componentActive)
@@ -81,4 +101,15 @@ export class CategoryComponent implements OnInit, OnDestroy {
     });
   }
 
+  private getCategoryById(categoryId: string) {
+    this.categoryService.getById(categoryId)
+      .pipe(
+        takeWhile(() => this.componentActive)
+      ).subscribe(
+        category => {
+          this.category = category;
+          this.createForm();
+        }
+      );
+  }
 }
