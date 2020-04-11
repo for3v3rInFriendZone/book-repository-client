@@ -56,10 +56,12 @@ export class CategoryComponent implements OnInit, OnDestroy {
       );
   }
 
-  submittedCategory() {
+  submitForm() {
 
     if (this.categoryForm.invalid) {
       console.log('Invalid form!');
+
+      return;
     }
 
     if (this.isEdit) {

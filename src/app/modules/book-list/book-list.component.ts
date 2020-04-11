@@ -6,7 +6,7 @@ import { takeWhile } from 'rxjs/internal/operators/takeWhile';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { BookService } from '../services/book.service';
-import { Book } from 'src/app/model/Book';
+import { Book } from 'src/app/model/book';
 import { SharedService } from 'src/app/util/shared.service';
 
 @Component({
@@ -52,7 +52,7 @@ export class BookListComponent implements OnInit, OnDestroy {
     this.router.navigate(['/knjiga', id]);
   }
 
-  displayOptions(content, bookId: string) {
+  displayOptions(content) {
     this.modalService.open(content, { centered: true });
   }
 

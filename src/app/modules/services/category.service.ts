@@ -26,7 +26,7 @@ export class CategoryService {
     return this.http.post<Category>(`${environment.url}${this.categoryUrl}`, category);
   }
 
-  update(id: string, category: Category) {
+  update(id: string, category: Category): Observable<Category> {
     return this.http.put<Category>(`${environment.url}${this.categoryUrl}/${id}`, category);
   }
 

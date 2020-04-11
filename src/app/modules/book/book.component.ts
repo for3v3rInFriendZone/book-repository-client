@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 import { takeWhile } from 'rxjs/internal/operators/takeWhile';
@@ -8,7 +8,8 @@ import { SharedService } from 'src/app/util/shared.service';
 import { CategoryService } from '../services/category.service';
 import { Category } from 'src/app/model/category';
 import { BookService } from '../services/book.service';
-import { Book } from 'src/app/model/Book';
+import { Book } from 'src/app/model/book';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-book',
@@ -19,6 +20,7 @@ export class BookComponent implements OnInit, OnDestroy {
 
   componentActive = true;
   bookId: string;
+  isEdit = false;
   newBookRoute = 'Унос књиге';
   editBookRoute = 'Измена књиге';
   keepingPlaces = ['Нови Сад', 'Факултет', 'Стара Пазова', 'Друго'];
@@ -32,7 +34,9 @@ export class BookComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private sharedService: SharedService,
     private categoryService: CategoryService,
-    private bookService: BookService
+    private bookService: BookService,
+    private snackBar: MatSnackBar,
+    private route: Router,
   ) { }
 
   ngOnInit() {
@@ -58,6 +62,7 @@ export class BookComponent implements OnInit, OnDestroy {
           this.bookId = params['id'];
           if (this.bookId) {
             this.sharedService.sendMessage(this.editBookRoute);
+            this.isEdit = true;
             this.getBookById(this.bookId);
           } else {
             this.sharedService.sendMessage(this.newBookRoute);
@@ -67,22 +72,19 @@ export class BookComponent implements OnInit, OnDestroy {
       );
   }
 
-  saveBook() {
+  submitForm() {
     if (this.bookForm.invalid) {
       console.log('Invalid form!');
-    }
-    const newBook: Book = this.bookForm.value;
-    newBook.authors = this.getAuthors(this.bookForm.value.authors);
 
-    this.bookService.save(newBook)
-      .pipe(
-        takeWhile(() => this.componentActive)
-      ).subscribe(
-        savedBook => {
-          console.log(savedBook);
-        },
-        err => console.log(err)
-      );
+      return;
+    }
+
+    if (this.isEdit) {
+      this.updateBook(this.bookId);
+    } else {
+      this.createBook();
+    }
+
   }
 
   clearForm() {
@@ -91,6 +93,34 @@ export class BookComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.componentActive = false;
+  }
+
+  private updateBook(bookId: string) {
+    this.bookService.update(bookId, this.bookForm.value)
+    .pipe(
+      takeWhile(() => this.componentActive)
+    ).subscribe(
+      () => {
+        this.showSuccess('Успешно сачувана књига!');
+        this.route.navigate(['/naslovna']);
+      },
+      err => console.log(err)
+    );
+  }
+
+  private createBook() {
+    const newBook: Book = this.bookForm.value;
+    newBook.authors = this.getAuthors(this.bookForm.value.authors);
+
+    this.bookService.create(newBook)
+      .pipe(
+        takeWhile(() => this.componentActive)
+      ).subscribe(
+        savedBook => {
+          console.log(savedBook);
+        },
+        err => console.log(err)
+      );
   }
 
   private getAuthors(authors: string): string[] {
@@ -130,6 +160,12 @@ export class BookComponent implements OnInit, OnDestroy {
       keepingPlace: new FormControl(this.book.keepingPlace),
       categories: new FormControl(this.book.categories),
       inventoryNumber: new FormControl(this.book.inventoryNumber)
+    });
+  }
+
+  private showSuccess(text: string) {
+    this.snackBar.open(text, '', {
+      duration: 2000,
     });
   }
 }
