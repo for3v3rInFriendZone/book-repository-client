@@ -106,7 +106,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
       ).subscribe(
         () => {
           this.showSuccess('Успешно сачувана категорија!');
-          this.route.navigate(['/naslovna']);
+          this.route.navigate(['/kategorije']);
         },
         err => console.log(err)
       );
@@ -119,7 +119,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
       ).subscribe(
         () => {
           this.showSuccess('Успешно направљена категорија!');
-          this.route.navigate(['/naslovna']);
         },
         err => console.log(err)
       );
@@ -139,7 +138,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
   private showSuccess(text: string) {
     this.snackBar.open(text, '', {
-      duration: 2000,
+      duration: 3000,
     });
   }
 }

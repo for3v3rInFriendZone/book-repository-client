@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Location } from '@angular/common';
 
 import { takeWhile } from 'rxjs/internal/operators/takeWhile';
 
@@ -18,8 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private sharedService: SharedService,
-    private location: Location,
-    private router: Router
+    private route: Router
   ) { }
 
   ngOnInit() {
@@ -40,6 +38,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   goBack() {
     this.sharedService.sendMessage('');
-    this.location.back();
+    this.route.navigate(['/naslovna']);
   }
 }

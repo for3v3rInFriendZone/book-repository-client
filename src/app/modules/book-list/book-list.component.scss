@@ -1,7 +1,7 @@
 .book-list {
   display: grid;
   grid-template-columns: repeat(6, minmax(100px, auto));
-  grid-template-rows: repeat(3, minmax(100px, auto));
+  grid-template-rows: repeat(3, auto);
   gap: 1em;
 
   -webkit-touch-callout: none;
@@ -19,11 +19,11 @@
 
   .book {
     background: #fff;
-    padding: 1em;
+    padding: .8em;
     text-align: center;
 
     img {
-      width: 90px;
+      width: 140px;
       height: 140px;
     }
 
@@ -53,11 +53,16 @@
         font-weight: bolder;
       }
     }
+
+    .created-at {
+      margin-top: 1.2em;
+      font-style: italic;
+    }
   }
 
   .book:hover {
     cursor: pointer;
-    box-shadow: 5px 5px lightgray;
+    box-shadow: 12px 10px 14px -8px rgba(0,0,0,0.73);
   }
 }
 

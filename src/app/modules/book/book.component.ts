@@ -84,7 +84,19 @@ export class BookComponent implements OnInit, OnDestroy {
     } else {
       this.createBook();
     }
+  }
 
+  removeBook() {
+    this.bookService.remove(this.bookId)
+      .pipe(
+        takeWhile(() => this.componentActive)
+      ).subscribe(
+        () => {
+          this.showSuccess('Књига је успешно обрисана!');
+          this.route.navigate(['/naslovna']);
+        },
+        err => console.log(err)
+      );
   }
 
   clearForm() {
@@ -96,16 +108,18 @@ export class BookComponent implements OnInit, OnDestroy {
   }
 
   private updateBook(bookId: string) {
-    this.bookService.update(bookId, this.bookForm.value)
-    .pipe(
-      takeWhile(() => this.componentActive)
-    ).subscribe(
-      () => {
-        this.showSuccess('Успешно сачувана књига!');
-        this.route.navigate(['/naslovna']);
-      },
-      err => console.log(err)
-    );
+    const editedBook = { ...this.book, ...this.bookForm.value };
+    
+    this.bookService.update(bookId, editedBook)
+      .pipe(
+        takeWhile(() => this.componentActive)
+      ).subscribe(
+        () => {
+          this.showSuccess('Успешно сачувана књига!');
+          this.route.navigate(['/knjige']);
+        },
+        err => console.log(err)
+      );
   }
 
   private createBook() {
@@ -116,8 +130,9 @@ export class BookComponent implements OnInit, OnDestroy {
       .pipe(
         takeWhile(() => this.componentActive)
       ).subscribe(
-        savedBook => {
-          console.log(savedBook);
+        () => {
+          this.showSuccess('Књига је успешно направљена!');
+          this.clearForm();
         },
         err => console.log(err)
       );
@@ -159,13 +174,14 @@ export class BookComponent implements OnInit, OnDestroy {
       form: new FormControl(this.book.form),
       keepingPlace: new FormControl(this.book.keepingPlace),
       categories: new FormControl(this.book.categories),
-      inventoryNumber: new FormControl(this.book.inventoryNumber)
+      inventoryNumber: new FormControl(this.book.inventoryNumber),
+      image: new FormControl(this.book.image)
     });
   }
 
   private showSuccess(text: string) {
     this.snackBar.open(text, '', {
-      duration: 2000,
+      duration: 3000,
     });
   }
 }

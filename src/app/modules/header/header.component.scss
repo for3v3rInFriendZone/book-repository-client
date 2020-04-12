@@ -1,11 +1,16 @@
 .card-header {
     background-color: lightskyblue;
     font-weight: 650;
+    display: flex;
+    justify-content: space-between;
 
     .fa-arrow-left {
-        margin-right: 350px;
         font-size: 16px;
         color: gray;
         cursor: pointer;
+    }
+
+    .empty-space {
+        width: fit-content;
     }
 }
