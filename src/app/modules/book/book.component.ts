@@ -93,6 +93,7 @@ export class BookComponent implements OnInit, OnDestroy {
       ).subscribe(
         () => {
           this.showSuccess('Књига је успешно обрисана!');
+          this.sharedService.setNumberOfBooks(this.sharedService.getNumberOfBooks() - 1);
           this.route.navigate(['/naslovna']);
         },
         err => console.log(err)
@@ -109,7 +110,7 @@ export class BookComponent implements OnInit, OnDestroy {
 
   private updateBook(bookId: string) {
     const editedBook = { ...this.book, ...this.bookForm.value };
-    
+
     this.bookService.update(bookId, editedBook)
       .pipe(
         takeWhile(() => this.componentActive)
@@ -132,6 +133,7 @@ export class BookComponent implements OnInit, OnDestroy {
       ).subscribe(
         () => {
           this.showSuccess('Књига је успешно направљена!');
+          this.sharedService.setNumberOfBooks(this.sharedService.getNumberOfBooks() + 1);
           this.clearForm();
         },
         err => console.log(err)
@@ -181,7 +183,7 @@ export class BookComponent implements OnInit, OnDestroy {
 
   private showSuccess(text: string) {
     this.snackBar.open(text, '', {
-      duration: 3000,
+      duration: 2300,
     });
   }
 }

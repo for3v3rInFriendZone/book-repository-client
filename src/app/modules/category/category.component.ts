@@ -138,7 +138,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
   private showSuccess(text: string) {
     this.snackBar.open(text, '', {
-      duration: 3000,
+      duration: 2300,
     });
   }
 }

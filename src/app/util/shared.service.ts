@@ -7,6 +7,7 @@ import { Subject, Observable } from 'rxjs';
 export class SharedService {
 
   private currentUrlSubject = new Subject<string>();
+  private numberOfBooks: number;
 
   sendMessage(message: string) {
     this.currentUrlSubject.next(message);
@@ -14,5 +15,13 @@ export class SharedService {
 
   getMessage(): Observable<string> {
     return this.currentUrlSubject.asObservable();
+  }
+
+  setNumberOfBooks(number: number) {
+    this.numberOfBooks = number;
+  }
+
+  getNumberOfBooks() {
+    return this.numberOfBooks;
   }
 }

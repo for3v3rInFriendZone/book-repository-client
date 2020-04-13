@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { BookService } from '../services/book.service';
 
 import { takeWhile } from 'rxjs/internal/operators/takeWhile';
+import { SharedService } from 'src/app/util/shared.service';
 
 @Component({
   selector: 'app-footer',
@@ -16,7 +17,8 @@ export class FooterComponent implements OnInit {
   numberOfBooks: number;
 
   constructor(
-    private bookService: BookService
+    private bookService: BookService,
+    private sharedService: SharedService
   ) { }
 
   ngOnInit() {
@@ -32,7 +34,7 @@ export class FooterComponent implements OnInit {
       ).subscribe(
         books => {
           this.loading = false;
-          this.numberOfBooks = books.length
+          this.sharedService.setNumberOfBooks(books.length);
         },
         () => this.loading = false
       );
