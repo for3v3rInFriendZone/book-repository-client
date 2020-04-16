@@ -6,6 +6,7 @@ import { BookListComponent } from './modules/book-list/book-list.component';
 import { BookComponent } from './modules/book/book.component';
 import { CategoryComponent } from './modules/category/category.component';
 import { CategoryListComponent } from './modules/category-list/category-list.component';
+import { BookDetailsComponent } from './modules/book-details/book-details.component';
 
 const routes: Routes = [
     {
@@ -23,6 +24,10 @@ const routes: Routes = [
     },
     {
         path: 'knjiga/:id',
+        component: BookDetailsComponent
+    },
+    {
+        path: 'knjiga/:id/izmena',
         component: BookComponent
     },
     {

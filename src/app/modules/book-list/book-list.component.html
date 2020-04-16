@@ -3,8 +3,7 @@
 <div class="animated fadeIn book-list" *ngIf="!isLoading">
 
   <div *ngFor="let book of books" class="book" (click)="bookDetails(book.id)">
-    <img class="book-img" src="{{book.image}}"
-      alt="Насловна страна књиге" />
+    <img class="book-img" src="{{book.image ? book.image : defaultImageLink}}" alt="Насловна страна књиге" />
     <div class="title">{{book.title}}</div>
     <div class="authors">{{book.authors}}</div>
     <div class="language">Језик: <span class="font-weight-bold font-italic">{{book.publicationLanguage}} </span></div>

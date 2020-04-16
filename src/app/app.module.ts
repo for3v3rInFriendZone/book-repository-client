@@ -22,6 +22,7 @@ import { CategoryService } from './modules/services/category.service';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { CategoryComponent } from './modules/category/category.component';
 import { CategoryListComponent } from './modules/category-list/category-list.component';
+import { BookDetailsComponent } from './modules/book-details/book-details.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CategoryListComponent } from './modules/category-list/category-list.com
     BookComponent,
     SpinnerComponent,
     CategoryComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    BookDetailsComponent
   ],
   imports: [
     BrowserModule,
