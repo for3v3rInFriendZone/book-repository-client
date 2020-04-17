@@ -71,7 +71,7 @@
       <div class="col-6 centered-label">
         <label class="col-form-label">Област</label>
         <select multiple class="custom-select h-75" formControlName="categories">
-          <option *ngFor="let category of availableCategories" [value]="category.id">{{category.name}}</option>
+          <option *ngFor="let category of availableCategories" [value]="category.name">{{category.name}}</option>
         </select>
       </div>
 
@@ -93,8 +93,6 @@
     <div class="d-flex justify-content-around">
       <button type="button" (click)="submitForm()" class="btn btn-outline-success btn-lg">Сачувај <i
           class="far fa-save"></i></button>
-      <button type="button" *ngIf="isEdit" (click)="removeBook()" class="btn btn-outline-danger btn-lg">Обриши <i
-          class="fas fa-minus-square"></i></button>
       <button type="button" (click)="clearForm()" class="btn btn-outline-secondary btn-lg">Очисти <i
           class="fas fa-eraser"></i></button>
     </div>

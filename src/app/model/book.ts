@@ -1,9 +1,8 @@
-import { Category } from './category';
 
 export interface Book {
     id: string;
     title: string;
-    authors: string[];
+    authors: string;
     publisher: string;
     publishedYear: number;
     publication: string;

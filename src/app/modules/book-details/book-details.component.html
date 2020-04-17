@@ -1,1 +1,45 @@
-<p>Hellooo </p>
+<section class="animated fadeIn book-details-section">
+
+    <div class="book-details">
+        <div class="book-title">
+            <h1> {{book.title}} </h1>
+            <div class="border-top my-3"></div>
+            <div>{{book.authors}}</div>
+        </div>
+
+        <img src="{{defaultImageLink}}" alt="Насловна страна књиге" />
+
+        <div class="book-detail-other">
+            <div class="mb-4">
+                <span class="left-side"> Форма: </span> {{book.form}} | {{book.numberOfPages}} страница
+            </div>
+            <div class="mb-4">
+                <span class="left-side"> Датум издавања: </span> {{book.publishedYear}}
+            </div>
+            <div class="mb-4">
+                <span class="left-side"> Издавач: </span> {{book.publisher}} | {{book.publication}}
+            </div>
+            <div class="mb-4">
+                <span class="left-side"> Језик: </span> {{book.publicationLanguage}}
+            </div>
+            <div class="mb-4">
+                <span class="left-side"> Место чувања: </span> {{book.keepingPlace}}
+            </div>
+            <div class="mb-4">
+                <span class="left-side"> Области: </span> {{book.categories}}
+            </div>
+            <div class="mb-4">
+                <span class="left-side"> Инвентарски број: </span> {{book.inventoryNumber}}
+            </div>
+        </div>
+
+        <div class="book-options">
+            <div class="d-flex justify-content-around">
+                <button type="button" (click)="goToEditBook()" class="btn btn-outline-info btn-lg">Измени <i
+                        class="far fa-edit"></i></button>
+                <button type="button" (click)="removeBook()" class="btn btn-outline-danger btn-lg">Обриши
+                    <i class="fas fa-minus-square"></i></button>
+            </div>
+        </div>
+    </div>
+</section>

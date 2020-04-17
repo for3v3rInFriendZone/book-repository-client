@@ -20,6 +20,7 @@ export class BookListComponent implements OnInit, OnDestroy {
   isLoading = false;
   books: Book[];
   routeHeader = 'Преглед књига';
+  defaultImageLink = 'https://drive.google.com/uc?id=14j6qOgRXWJD6TtsHQF9ZN5iBogfsoJwt';
 
   constructor(
     private bookService: BookService,

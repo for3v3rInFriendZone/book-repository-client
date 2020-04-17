@@ -35,7 +35,6 @@ export class BookComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
     private categoryService: CategoryService,
     private bookService: BookService,
-    private snackBar: MatSnackBar,
     private route: Router,
   ) { }
 
@@ -86,20 +85,6 @@ export class BookComponent implements OnInit, OnDestroy {
     }
   }
 
-  removeBook() {
-    this.bookService.remove(this.bookId)
-      .pipe(
-        takeWhile(() => this.componentActive)
-      ).subscribe(
-        () => {
-          this.showSuccess('Књига је успешно обрисана!');
-          this.sharedService.setNumberOfBooks(this.sharedService.getNumberOfBooks() - 1);
-          this.route.navigate(['/naslovna']);
-        },
-        err => console.log(err)
-      );
-  }
-
   clearForm() {
     this.bookForm.reset();
   }
@@ -116,7 +101,7 @@ export class BookComponent implements OnInit, OnDestroy {
         takeWhile(() => this.componentActive)
       ).subscribe(
         () => {
-          this.showSuccess('Успешно сачувана књига!');
+          this.sharedService.showSuccess('Успешно сачувана књига!');
           this.route.navigate(['/knjige']);
         },
         err => console.log(err)
@@ -125,31 +110,18 @@ export class BookComponent implements OnInit, OnDestroy {
 
   private createBook() {
     const newBook: Book = this.bookForm.value;
-    newBook.authors = this.getAuthors(this.bookForm.value.authors);
 
     this.bookService.create(newBook)
       .pipe(
         takeWhile(() => this.componentActive)
       ).subscribe(
         () => {
-          this.showSuccess('Књига је успешно направљена!');
+          this.sharedService.showSuccess('Књига је успешно направљена!');
           this.sharedService.setNumberOfBooks(this.sharedService.getNumberOfBooks() + 1);
           this.clearForm();
         },
         err => console.log(err)
       );
-  }
-
-  private getAuthors(authors: string): string[] {
-    if (authors) {
-      if (authors.split(',').length > 0) {
-        return authors.split(',');
-      }
-
-      return [authors];
-    }
-
-    return [];
   }
 
   private getBookById(bookId: string) {
@@ -178,12 +150,6 @@ export class BookComponent implements OnInit, OnDestroy {
       categories: new FormControl(this.book.categories),
       inventoryNumber: new FormControl(this.book.inventoryNumber),
       image: new FormControl(this.book.image)
-    });
-  }
-
-  private showSuccess(text: string) {
-    this.snackBar.open(text, '', {
-      duration: 2300,
     });
   }
 }
