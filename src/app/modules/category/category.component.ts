@@ -29,7 +29,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private categoryService: CategoryService,
-    private snackBar: MatSnackBar,
     private route: Router
   ) { }
 
@@ -70,19 +69,19 @@ export class CategoryComponent implements OnInit, OnDestroy {
       this.saveCategory();
     }
   }
-  
+
   removeCategory() {
 
     this.categoryService.remove(this.category.id)
-    .pipe(
-      takeWhile(() => this.componentActive)
-    ).subscribe(
-      () => {
-        this.showSuccess('Успешно обрисана категорија!');
-        this.route.navigate(['/kategorije']);
-      },
-      err => console.log(err)
-    );
+      .pipe(
+        takeWhile(() => this.componentActive)
+      ).subscribe(
+        () => {
+          this.sharedService.showToastMessage('Успешно обрисана категорија!');
+          this.route.navigate(['/kategorije']);
+        },
+        err => console.log(err)
+      );
   }
 
   clearForm() {
@@ -98,14 +97,14 @@ export class CategoryComponent implements OnInit, OnDestroy {
       name: new FormControl(this.category.name)
     });
   }
-  
+
   private updateCategory(id: string) {
     this.categoryService.update(id, this.categoryForm.value)
       .pipe(
         takeWhile(() => this.componentActive)
       ).subscribe(
         () => {
-          this.showSuccess('Успешно сачувана категорија!');
+          this.sharedService.showToastMessage('Успешно сачувана категорија!');
           this.route.navigate(['/kategorije']);
         },
         err => console.log(err)
@@ -118,9 +117,9 @@ export class CategoryComponent implements OnInit, OnDestroy {
         takeWhile(() => this.componentActive)
       ).subscribe(
         () => {
-          this.showSuccess('Успешно направљена категорија!');
+          this.sharedService.showToastMessage('Успешно направљена категорија!');
         },
-        err => console.log(err)
+        err => this.sharedService.showToastMessage(err.error.error)
       );
   }
 
@@ -134,11 +133,5 @@ export class CategoryComponent implements OnInit, OnDestroy {
           this.createForm();
         }
       );
-  }
-
-  private showSuccess(text: string) {
-    this.snackBar.open(text, '', {
-      duration: 2300,
-    });
   }
 }

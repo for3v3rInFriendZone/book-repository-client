@@ -30,7 +30,7 @@ export class SharedService {
     return this.numberOfBooks;
   }
 
-  showSuccess(text: string) {
+  showToastMessage(text: string) {
     this.snackBar.open(text, '', {
       duration: 2300,
     });

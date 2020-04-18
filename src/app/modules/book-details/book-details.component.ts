@@ -61,7 +61,7 @@ export class BookDetailsComponent implements OnInit {
         takeWhile(() => this.componentActive)
       ).subscribe(
         () => {
-          this.sharedService.showSuccess('Књига је успешно обрисана!');
+          this.sharedService.showToastMessage('Књига је успешно обрисана!');
           this.sharedService.setNumberOfBooks(this.sharedService.getNumberOfBooks() - 1);
           this.router.navigate(['/naslovna']);
         },

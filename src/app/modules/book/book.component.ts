@@ -101,7 +101,7 @@ export class BookComponent implements OnInit, OnDestroy {
         takeWhile(() => this.componentActive)
       ).subscribe(
         () => {
-          this.sharedService.showSuccess('Успешно сачувана књига!');
+          this.sharedService.showToastMessage('Успешно сачувана књига!');
           this.route.navigate(['/knjige']);
         },
         err => console.log(err)
@@ -116,7 +116,7 @@ export class BookComponent implements OnInit, OnDestroy {
         takeWhile(() => this.componentActive)
       ).subscribe(
         () => {
-          this.sharedService.showSuccess('Књига је успешно направљена!');
+          this.sharedService.showToastMessage('Књига је успешно направљена!');
           this.sharedService.setNumberOfBooks(this.sharedService.getNumberOfBooks() + 1);
           this.clearForm();
         },
