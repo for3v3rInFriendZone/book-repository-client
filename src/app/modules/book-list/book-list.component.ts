@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 
 import { takeWhile } from 'rxjs/internal/operators/takeWhile';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { BookService } from '../services/book.service';
 import { Book } from 'src/app/model/book';
 import { SharedService } from 'src/app/util/shared.service';
@@ -22,11 +20,11 @@ export class BookListComponent implements OnInit, OnDestroy {
   routeHeader = 'Преглед књига';
   defaultImageLink = 'https://drive.google.com/uc?id=14j6qOgRXWJD6TtsHQF9ZN5iBogfsoJwt';
 
+
   constructor(
     private bookService: BookService,
     private sharedService: SharedService,
-    private router: Router,
-    private modalService: NgbModal
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -51,10 +49,6 @@ export class BookListComponent implements OnInit, OnDestroy {
 
   bookDetails(id: string) {
     this.router.navigate(['/knjiga', id]);
-  }
-
-  displayOptions(content) {
-    this.modalService.open(content, { centered: true });
   }
 
   ngOnDestroy() {
