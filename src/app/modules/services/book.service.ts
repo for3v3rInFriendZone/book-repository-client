@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 import { Book } from 'src/app/model/book';
@@ -14,8 +14,12 @@ export class BookService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Book[]> {
-    return this.http.get<Book[]>(`${environment.url}${this.booksUrl}`);
+  getAll(sortingType?: string, sortingDirection?: string): Observable<Book[]> {
+    let params = new HttpParams()
+      .append('sortingType', sortingType)
+      .append('sortingDirection', sortingDirection);
+
+    return this.http.get<Book[]>(`${environment.url}${this.booksUrl}`, { params: params });
   }
 
   getById(id: string): Observable<Book> {

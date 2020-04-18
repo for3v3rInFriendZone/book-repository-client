@@ -6,6 +6,8 @@ import { takeWhile } from 'rxjs/internal/operators/takeWhile';
 import { BookService } from '../services/book.service';
 import { Book } from 'src/app/model/book';
 import { SharedService } from 'src/app/util/shared.service';
+import { SortingType } from 'src/app/model/sorting-type';
+import { SortingDirection } from 'src/app/model/sorting-direction';
 
 @Component({
   selector: 'app-book-list',
@@ -19,7 +21,8 @@ export class BookListComponent implements OnInit, OnDestroy {
   books: Book[];
   routeHeader = 'Преглед књига';
   defaultImageLink = 'https://drive.google.com/uc?id=14j6qOgRXWJD6TtsHQF9ZN5iBogfsoJwt';
-
+  sortingType = SortingType.TITLE.toString();
+  sortingDirection = SortingDirection.ASC.toString();
 
   constructor(
     private bookService: BookService,
@@ -35,7 +38,7 @@ export class BookListComponent implements OnInit, OnDestroy {
   getBooks() {
     this.isLoading = true;
 
-    this.bookService.getAll()
+    this.bookService.getAll(this.sortingType, this.sortingDirection)
       .pipe(
         takeWhile(() => this.componentActive)
       ).subscribe(
