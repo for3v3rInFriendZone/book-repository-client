@@ -1,5 +1,15 @@
 <app-spinner [showSpinner]="isLoading" message="Учитавање књига"> </app-spinner>
 
+<div class="btn-group mb-4" ngbDropdown role="group">
+  <button class="btn btn-lg btn-info" ngbDropdownToggle>Сортирај</button>
+  <div class="dropdown-menu" ngbDropdownMenu>
+    <button ngbDropdownItem (click)="sort('TITLE', 'ASC')"> <span class="font-weight-bold">Наслов: </span> А - Ш</button>
+    <button ngbDropdownItem (click)="sort('TITLE', 'DESC')"> <span class="font-weight-bold">Наслов: </span> Ш - А</button>
+    <button ngbDropdownItem (click)="sort('CREATED_AT', 'DESC')"> <span class="font-weight-bold">Датума уноса:</span> најновије</button>
+    <button ngbDropdownItem (click)="sort('CREATED_AT', 'ASC')"> <span class="font-weight-bold">Датума уноса:</span> најстарије</button>
+  </div>
+</div>
+
 <div class="animated fadeIn book-list" *ngIf="!isLoading">
 
   <div *ngFor="let book of books" class="book" (click)="bookDetails(book.id)">

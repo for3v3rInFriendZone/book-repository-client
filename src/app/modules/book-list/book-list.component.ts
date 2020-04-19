@@ -54,6 +54,13 @@ export class BookListComponent implements OnInit, OnDestroy {
     this.router.navigate(['/knjiga', id]);
   }
 
+  sort(sortingType: string, sortingDirection: string) {
+    this.sortingType = sortingType;
+    this.sortingDirection = sortingDirection;
+
+    this.getBooks();
+  }
+
   ngOnDestroy() {
     this.componentActive = false;
   }
