@@ -43,28 +43,7 @@ export class BookListComponent implements OnInit, OnDestroy {
       takeWhile(() => this.componentActive)
     ).subscribe(
       term => {
-        if (!term) {
-          this.bookService.getAll(this.sortingType, this.sortingDirection)
-            .pipe(
-              takeWhile(() => this.componentActive)
-            ).subscribe(
-              books => {
-                this.isLoading = false;
-                this.books = books;
-              },
-              () => this.isLoading = false
-            );
-        }
-
-        if (term.length < 3) {
-          return;
-        }
-
-        this.bookService.search(term).pipe(
-          takeWhile(() => this.componentActive)
-        ).subscribe(
-          books => this.books = books
-        )
+        this.search(term);
       }
     )
   }
@@ -88,7 +67,36 @@ export class BookListComponent implements OnInit, OnDestroy {
     this.router.navigate(['/knjiga', id]);
   }
 
+  search(term) {
+
+    if (!term) {
+      this.bookService.getAll(this.sortingType, this.sortingDirection)
+        .pipe(
+          takeWhile(() => this.componentActive)
+        ).subscribe(
+          books => {
+            this.isLoading = false;
+            this.books = books;
+          },
+          () => this.isLoading = false
+        );
+    }
+
+    if (term.length < 2) {
+      return;
+    }
+
+    this.bookService.search(term).pipe(
+      takeWhile(() => this.componentActive)
+    ).subscribe(
+      books => this.books = books
+    )
+  }
+
   sort(sortingType: string, sortingDirection: string) {
+    /* Reset search filter while sorting */
+    this.filter.setValue('');
+    
     this.sortingType = sortingType;
     this.sortingDirection = sortingDirection;
 
