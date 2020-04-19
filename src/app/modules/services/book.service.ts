@@ -11,6 +11,7 @@ import { Book } from 'src/app/model/book';
 export class BookService {
 
   booksUrl = '/book';
+  bookSearch = '/search';
 
   constructor(private http: HttpClient) { }
 
@@ -20,6 +21,13 @@ export class BookService {
       .append('sortingDirection', sortingDirection);
 
     return this.http.get<Book[]>(`${environment.url}${this.booksUrl}`, { params: params });
+  }
+
+  search(term: string): Observable<Book[]> {
+    let params = new HttpParams()
+      .append('term', term);
+
+    return this.http.get<Book[]>(`${environment.url}${this.booksUrl}${this.bookSearch}`, { params: params });
   }
 
   getById(id: string): Observable<Book> {

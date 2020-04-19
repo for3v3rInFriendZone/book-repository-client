@@ -8,6 +8,7 @@ import { Book } from 'src/app/model/book';
 import { SharedService } from 'src/app/util/shared.service';
 import { SortingType } from 'src/app/model/sorting-type';
 import { SortingDirection } from 'src/app/model/sorting-direction';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-book-list',
@@ -23,6 +24,7 @@ export class BookListComponent implements OnInit, OnDestroy {
   defaultImageLink = 'https://drive.google.com/uc?id=14j6qOgRXWJD6TtsHQF9ZN5iBogfsoJwt';
   sortingType = SortingType.TITLE.toString();
   sortingDirection = SortingDirection.ASC.toString();
+  filter = new FormControl('');
 
   constructor(
     private bookService: BookService,
@@ -33,6 +35,29 @@ export class BookListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.sharedService.sendMessage(this.routeHeader);
     this.getBooks();
+    this.onSearch();
+  }
+
+  onSearch() {
+    this.filter.valueChanges.pipe(
+      takeWhile(() => this.componentActive)
+    ).subscribe(
+      term => {
+        if(!term) {
+          this.getBooks();
+        }
+
+        if(term.length < 3) {
+          return;
+        }
+
+        this.bookService.search(term).pipe(
+          takeWhile(() => this.componentActive)
+        ).subscribe(
+          books => this.books = books
+        )
+      }
+    )
   }
 
   getBooks() {

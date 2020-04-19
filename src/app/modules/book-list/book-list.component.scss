@@ -4,22 +4,30 @@
   grid-template-rows: repeat(3, auto);
   gap: 1em;
 
-  -webkit-touch-callout: none;
-  /* iOS Safari */
-  -webkit-user-select: none;
-  /* Safari */
-  -khtml-user-select: none;
-  /* Konqueror HTML */
-  -moz-user-select: none;
-  /* Old versions of Firefox */
-  -ms-user-select: none;
-  /* Internet Explorer/Edge */
   user-select: none;
   /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
 
+  .sort {
+    grid-column: 1 / 2;
+  }
+
+  .search {
+    text-align: center;
+    grid-column: 3 / 5;
+    
+    input {
+      padding: 18px;
+      font-size: 15px;
+    }
+  }
+
+  .void {
+    grid-column: 5 / 7;
+  }
+
   .book {
     background: #fff;
-    padding: .8em;
+    padding: 0.8em;
     text-align: center;
 
     img {
@@ -62,7 +70,7 @@
 
   .book:hover {
     cursor: pointer;
-    box-shadow: 12px 10px 14px -8px rgba(0,0,0,0.73);
+    box-shadow: 12px 10px 14px -8px rgba(0, 0, 0, 0.73);
   }
 }
 
