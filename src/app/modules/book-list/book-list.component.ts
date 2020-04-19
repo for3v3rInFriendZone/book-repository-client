@@ -43,11 +43,20 @@ export class BookListComponent implements OnInit, OnDestroy {
       takeWhile(() => this.componentActive)
     ).subscribe(
       term => {
-        if(!term) {
-          this.getBooks();
+        if (!term) {
+          this.bookService.getAll(this.sortingType, this.sortingDirection)
+            .pipe(
+              takeWhile(() => this.componentActive)
+            ).subscribe(
+              books => {
+                this.isLoading = false;
+                this.books = books;
+              },
+              () => this.isLoading = false
+            );
         }
 
-        if(term.length < 3) {
+        if (term.length < 3) {
           return;
         }
 
